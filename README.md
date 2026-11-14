@@ -18,25 +18,27 @@ A full-stack hostel portal with separate student and administrator experiences. 
 ```text
 Hostel_Management_System/
 ├── Hoste_Backend-main/
-│   ├── Route/                  # Express API routes
-│   ├── controller/             # Request handlers and business logic
-│   ├── model/                  # Mongoose schemas
-│   ├── middleware/             # JWT authentication middleware
-│   ├── congig/db.js            # MongoDB connection (directory name is "congig")
-│   ├── app.js                  # Backend entry point
-│   ├── package.json
-│   └── .env.example
+│   └── Hoste_Backend-main/
+│       ├── Route/              # Express API routes
+│       ├── controller/         # Request handlers and business logic
+│       ├── model/              # Mongoose schemas
+│       ├── middleware/         # JWT authentication middleware
+│       ├── congig/db.js        # MongoDB connection (directory name is "congig")
+│       ├── app.js              # Backend entry point
+│       ├── package.json
+│       └── .env.example
 │
 └── Hoste_frontend-main/
-    ├── public/
-    ├── src/
-    │   ├── api/                # Backend base URL
-    │   ├── components/         # Shared UI and complaint/announcement components
-    │   ├── contex/             # Login context
-    │   ├── pages/              # Student/admin pages
-    │   ├── App.js              # Frontend routes and login state
-    │   └── index.js            # React entry point
-    └── package.json
+    └── Hoste_frontend-main/
+        ├── public/
+        ├── src/
+        │   ├── api/            # Backend base URL
+        │   ├── components/     # Shared UI and complaint/announcement components
+        │   ├── contex/         # Login context
+        │   ├── pages/          # Student/admin pages
+        │   ├── App.js          # Frontend routes and login state
+        │   └── index.js        # React entry point
+        └── package.json
 ```
 
 The frontend and backend are independent Node.js projects. Install dependencies and run them in separate terminal windows.
@@ -64,7 +66,7 @@ cd Hostel_Management_System
 Open a terminal in the repository root:
 
 ```bash
-cd Hoste_Backend-main
+cd Hoste_Backend-main/Hoste_Backend-main
 npm ci
 ```
 
@@ -111,7 +113,7 @@ The backend listens at `http://localhost:4000`. Its root route, `http://localhos
 Open a **second** terminal window at the repository root:
 
 ```bash
-cd Hoste_frontend-main
+cd Hoste_frontend-main/Hoste_frontend-main
 npm ci
 npm start
 ```
@@ -167,18 +169,18 @@ Most student/admin data endpoints require an `Authorization: Bearer <token>` hea
 
 ## How the code is organized
 
-- `Hoste_frontend-main/src/App.js` declares the React pages and shares login-state setters through `LoginContext`.
-- `Hoste_frontend-main/src/api/config.js` defines the API base URL used by frontend requests.
-- `Hoste_Backend-main/app.js` creates the Express app, enables JSON and CORS middleware, connects to MongoDB, and mounts `Route/route.js` at `/route`.
+- `Hoste_frontend-main/Hoste_frontend-main/src/App.js` declares the React pages and shares login-state setters through `LoginContext`.
+- `Hoste_frontend-main/Hoste_frontend-main/src/api/config.js` defines the API base URL used by frontend requests.
+- `Hoste_Backend-main/Hoste_Backend-main/app.js` creates the Express app, enables JSON and CORS middleware, connects to MongoDB, and mounts `Hoste_Backend-main/Hoste_Backend-main/Route/route.js` at `/route`.
 - `Hoste_Backend-main/Route/route.js` maps HTTP methods and URL paths to controller functions.
-- `Hoste_Backend-main/middleware/middle.js` verifies the JWT and loads the current user from MongoDB into `req.user`.
-- `Hoste_Backend-main/controller/` contains authentication, complaint, announcement, and student-management logic.
-- `Hoste_Backend-main/model/` defines the user, complaint, and announcement collections.
+- `Hoste_Backend-main/Hoste_Backend-main/middleware/middle.js` verifies the JWT and loads the current user from MongoDB into `req.user`.
+- `Hoste_Backend-main/Hoste_Backend-main/controller/` contains authentication, complaint, announcement, and student-management logic.
+- `Hoste_Backend-main/Hoste_Backend-main/model/` defines the user, complaint, and announcement collections.
 
 ## Troubleshooting
 
 - **MongoDB connection fails:** Confirm the MongoDB service is running, check `DATABASE_URL`, and verify Atlas network access if using Atlas.
-- **Browser shows a network or CORS error:** Start the backend first and confirm it is listening on port `4000`. Check `Hoste_frontend-main/src/api/config.js`.
+- **Browser shows a network or CORS error:** Start the backend first and confirm it is listening on port `4000`. Check `Hoste_frontend-main/Hoste_frontend-main/src/api/config.js`.
 - **OTP emails are not sent:** Check `EMAIL_USER` and `EMAIL_PASS`. Use a Google App Password and make sure the mail account permits SMTP access.
 - **The frontend starts but API requests fail:** Check the backend terminal for errors and confirm the request URL begins with `http://localhost:4000/route`.
 - **An OTP stops working after restarting the backend:** Pending OTP data is currently stored in an in-memory JavaScript `Map`; restarting the process clears pending registrations.
