@@ -34,19 +34,19 @@ const AdminDashboard = () => {
         setLoading(true);
 
         // Fetch student count
-        const studentRes = await fetch(`${BASE_URL}/route/admin/total_student`, {
+        const studentRes = await fetch(`${BASE_URL}/admin/total_student`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const studentData = await studentRes.json();
 
         // Fetch complaint stats
-        const complaintRes = await fetch(`${BASE_URL}/route/admin/total_status`, {
+        const complaintRes = await fetch(`${BASE_URL}/admin/total_status`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const complaintData = await complaintRes.json();
 
         // Fetch announcements
-        const announcementRes = await fetch(`${BASE_URL}/route/get/annoucment`, {
+        const announcementRes = await fetch(`${BASE_URL}/get/annoucment`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const announcementData = await announcementRes.json();
