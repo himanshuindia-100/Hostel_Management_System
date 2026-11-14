@@ -14,7 +14,7 @@ const AllComplaints = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('jwt');
-      const response = await fetch(`${BASE_URL}/route/admin/get/all_complain`, {
+      const response = await fetch(`${BASE_URL}/admin/get/all_complain`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -40,7 +40,7 @@ const AllComplaints = () => {
   const updateStatus = async (complaintId, elementId, currentStatus) => {
     try {
       const token = localStorage.getItem('jwt');
-      const response = await fetch(`${BASE_URL}/route/admin/update/${complaintId}/${elementId}`, {
+      const response = await fetch(`${BASE_URL}/admin/update/${complaintId}/${elementId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const AllComplaints = () => {
 
     try {
       const token = localStorage.getItem('jwt');
-      const response = await fetch(`${BASE_URL}/route/delete/complain/${complaintId}/${elementId}`, {
+      const response = await fetch(`${BASE_URL}/delete/complain/${complaintId}/${elementId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

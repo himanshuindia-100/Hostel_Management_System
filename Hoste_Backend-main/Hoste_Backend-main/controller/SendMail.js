@@ -1,32 +1,33 @@
 const nodemailer = require("nodemailer");
 
-// Create and export a reusable mail function
+// Uses credentials from the backend .env file. Never commit mail credentials.
 const sendMail = async (to, subject, text, html = "") => {
-  try {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com", // ✅ correct Gmail SMTP
-      
-      secure: true,
-      auth: {
-        user: "choukseyshruti28@gmail.com", // your email
-        pass: "hxnbjbmuisyxnukq",        // your app password
-      },
-    });
+  const { EMAIL_USER, EMAIL_PASS } = process.env;
 
-    const info = await transporter.sendMail({
-      from: '"Hostel Admin" <choukseyshruti28@gmail.com>',
-      to,               // string or array of emails
-      subject,
-      text,
-      html,
-    });
-
-    console.log("Message sent: %s", info.messageId);
-    return info;
-  } catch (error) {
-    console.error("Error sending email:", error);
-    throw error;
+  if (!EMAIL_USER || !EMAIL_PASS) {
+    throw new Error("EMAIL_USER and EMAIL_PASS must be configured to send email.");
   }
+
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: EMAIL_USER,
+      pass: EMAIL_PASS,
+    },
+  });
+
+  const info = await transporter.sendMail({
+    from: `"Hostel Admin" <${EMAIL_USER}>`,
+    to,
+    subject,
+    text,
+    html,
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  return info;
 };
 
 module.exports = sendMail;
